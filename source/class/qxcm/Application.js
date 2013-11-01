@@ -53,19 +53,34 @@ qx.Class.define("qxcm.Application",
       -------------------------------------------------------------------------
       */
 
-      // Create a button
-      var button1 = new qx.ui.form.Button("First Button", "qxcm/test.png");
+      // Create the list
+      this.store = new qxcm.Store();
+      this.list = new qx.ui.list.List();
+      this.list.setWidth(270);
+      this.list.setLabelOptions({
+        converter : function(value, model) {
+            var name = value.get('name');
+            if (qx.lang.Type.isString(name)) {
+                return name;
+            } else {
+                return name.get('last') + ', ' + name.get('first');
+            }
+        }            
+      });
+
+      this.store.bind('model', this.list, 'model');
 
       // Document is the application root
       var doc = this.getRoot();
 
       // Add button to document at fixed coordinates
-      doc.add(button1, {left: 100, top: 50});
+      doc.add(this.list, {left: 100, top: 50});
 
-      // Add an event listener
-      button1.addListener("execute", function(e) {
-        alert("Hello World!");
-      });
+      this.list.addListener('dblclick', this.__onSelectionClick, this);
+    }
+
+    ,__onSelectionClick : function() {
+        debugger;
     }
   }
 });
