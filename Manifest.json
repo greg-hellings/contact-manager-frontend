@@ -1,0 +1,34 @@
+{
+  "info" : 
+  {
+    "name" : "app",
+
+    "summary" : "Qooxdoo Contact Manager",
+    "description" : "Qooxdoo sample application for https://github.com/azizpunjani/contact-manager-express-backend/",
+    
+    "homepage" : "http://home.thehellings.com:3000/",
+
+    "license" : "Public Domain",
+    "authors" : 
+    [
+      {
+        "name" : "Greg Hellings",
+        "email" : "greg.hellings@gmail.com"
+      }
+    ],
+
+    "version" : "trunk",
+    "qooxdoo-versions": ["3.0"]
+  },
+  
+  "provides" : 
+  {
+    "namespace"   : "qxcm",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation",
+    "type"        : "application"
+  }
+}
+
