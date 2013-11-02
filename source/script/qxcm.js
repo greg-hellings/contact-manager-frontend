@@ -20,7 +20,7 @@ qx.$$g = {}
 
 qx.$$loader = {
   parts : {"boot":[0]},
-  packages : {"0":{"uris":["__out__:qxcm.d99697299620.js","qxcm:qxcm/Application.js","__out__:qxcm.ff084453340d.js","qxcm:qxcm/Store.js","__out__:qxcm.00d1b79791d8.js","qxcm:qxcm/theme/Appearance.js","__out__:qxcm.f56a0c2ca51a.js","qxcm:qxcm/theme/Font.js","__out__:qxcm.29419cebdc36.js","qxcm:qxcm/theme/Color.js","__out__:qxcm.870138203df5.js","qxcm:qxcm/theme/Decoration.js","qxcm:qxcm/theme/Theme.js"]}},
+  packages : {"0":{"uris":["__out__:qxcm.d99697299620.js","qxcm:qxcm/Application.js","__out__:qxcm.ff084453340d.js","qxcm:qxcm/Store.js","__out__:qxcm.ed80f2688b0c.js","qxcm:qxcm/Editor.js","__out__:qxcm.ce8b235659ce.js","qxcm:qxcm/EditorWindow.js","__out__:qxcm.cbf4dccb6090.js","qxcm:qxcm/theme/Appearance.js","__out__:qxcm.f56a0c2ca51a.js","qxcm:qxcm/theme/Font.js","__out__:qxcm.29419cebdc36.js","qxcm:qxcm/theme/Color.js","__out__:qxcm.870138203df5.js","qxcm:qxcm/theme/Decoration.js","qxcm:qxcm/theme/Theme.js"]}},
   urisBefore : [],
   cssBefore : [],
   boot : "boot",
