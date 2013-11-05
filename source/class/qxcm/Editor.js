@@ -1,23 +1,27 @@
 qx.Class.define('qxcm.Editor', {
     extend    : qx.ui.form.Form,
 
+    include   : [
+        qx.locale.MTranslation
+    ],
+
     construct : function(model) {
         var firstName = new qx.ui.form.TextField(),
-            save      = new qx.ui.form.Button('Save'),
-            cancel    = new qx.ui.form.Button('Cancel');
+            save      = new qx.ui.form.Button(this.tr('Save')),
+            cancel    = new qx.ui.form.Button(this.tr('Cancel'));
 
         firstName.setWidth(250);
         this.base(arguments);
 
-        this.add(firstName,                  'First Name', null, 'name.first');
-        this.add(new qx.ui.form.TextField(), 'Last Name',  null, 'name.last');
-        this.add(new qx.ui.form.TextField(), 'Email',      null, 'email');
-        this.add(new qx.ui.form.TextField(), 'Mobile',     null, 'phone.mobile');
-        this.add(new qx.ui.form.TextField(), 'Home',       null, 'phone.home');
-        this.add(new qx.ui.form.TextField(), 'Street',     null, 'address.street');
-        this.add(new qx.ui.form.TextField(), 'City',       null, 'address.city');
-        this.add(new qx.ui.form.TextField(), 'State',      null, 'address.state');
-        this.add(new qx.ui.form.TextField(), 'Zip Code',   null, 'address.zip');
+        this.add(firstName,                  this.tr('First Name'), null, 'name.first');
+        this.add(new qx.ui.form.TextField(), this.tr('Last Name'),  null, 'name.last');
+        this.add(new qx.ui.form.TextField(), this.tr('Email'),      null, 'email');
+        this.add(new qx.ui.form.TextField(), this.tr('Mobile'),     null, 'phone.mobile');
+        this.add(new qx.ui.form.TextField(), this.tr('Home'),       null, 'phone.home');
+        this.add(new qx.ui.form.TextField(), this.tr('Street'),     null, 'address.street');
+        this.add(new qx.ui.form.TextField(), this.tr('City'),       null, 'address.city');
+        this.add(new qx.ui.form.TextField(), this.tr('State'),      null, 'address.state');
+        this.add(new qx.ui.form.TextField(), this.tr('Zip Code'),   null, 'address.zip');
 
         this.addButton(save);
         this.addButton(cancel);

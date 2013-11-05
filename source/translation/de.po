@@ -1,0 +1,72 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: you@your.org\n"
+"POT-Creation-Date: 2013-11-02 02:01-0600\n"
+"PO-Revision-Date: 2013-11-02 02:01-0600\n"
+"Last-Translator: you <you@your.org>\n"
+"Language-Team: Team <yourteam@your.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: qxcm/Application.js:81
+msgid "Create"
+msgstr ""
+
+#: qxcm/Application.js:84
+msgid "Remove"
+msgstr ""
+
+#: qxcm/Application.js:103
+msgid "Edit Contact"
+msgstr ""
+
+#: qxcm/Application.js:116
+msgid "Create new contact"
+msgstr ""
+
+#: qxcm/Editor.js:10
+msgid "Save"
+msgstr ""
+
+#: qxcm/Editor.js:11
+msgid "Cancel"
+msgstr ""
+
+#: qxcm/Editor.js:16
+msgid "First Name"
+msgstr ""
+
+#: qxcm/Editor.js:17
+msgid "Last Name"
+msgstr ""
+
+#: qxcm/Editor.js:18
+msgid "Email"
+msgstr ""
+
+#: qxcm/Editor.js:19
+msgid "Mobile"
+msgstr ""
+
+#: qxcm/Editor.js:20
+msgid "Home"
+msgstr ""
+
+#: qxcm/Editor.js:21
+msgid "Street"
+msgstr ""
+
+#: qxcm/Editor.js:22
+msgid "City"
+msgstr ""
+
+#: qxcm/Editor.js:23
+msgid "State"
+msgstr ""
+
+#: qxcm/Editor.js:24
+msgid "Zip Code"
+msgstr ""

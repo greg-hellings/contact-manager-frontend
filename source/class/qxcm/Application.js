@@ -16,6 +16,7 @@
  * - Mobile UI
  * - Factor out backend communications into helper classes for later use
  * - Proper scrolling after delete when at bottom of list
+ * - Refresh button
  */
 
 /**
@@ -76,10 +77,10 @@ qx.Class.define("qxcm.Application",
       });
       this.store.bind('model', this.list, 'model');
 
-      this.create = new qx.ui.form.Button('Create');
+      this.create = new qx.ui.form.Button(this.tr('Create'));
       this.create.setWidth(75);
 
-      this.remove = new qx.ui.form.Button('Remove');
+      this.remove = new qx.ui.form.Button(this.tr('Remove'));
       this.remove.setWidth(75);
       // Document is the application root
       var doc = this.getRoot();
@@ -98,7 +99,7 @@ qx.Class.define("qxcm.Application",
         var form   = new qxcm.Editor(),
             formController = new qx.data.controller.Form(this.list.getSelection().getItem(0), form);
 
-        this.modal = new qxcm.EditorWindow('Edit Contact', form);
+        this.modal = new qxcm.EditorWindow(this.tr('Edit Contact'), form);
 
         form.addListener('save',   this.save,       this);
     },
@@ -111,7 +112,7 @@ qx.Class.define("qxcm.Application",
     __create : function() {
         var form = new qxcm.Editor(),
             formController = new qx.data.controller.Form(null, form),
-            modal = new qxcm.EditorWindow('Create new contact', form);
+            modal = new qxcm.EditorWindow(this.tr('Create new contact'), form);
 
         formController.createModel();
         form.addListener('save', function() {
