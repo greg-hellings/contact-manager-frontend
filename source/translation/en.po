@@ -11,62 +11,94 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: qxcm/Application.js:81
-msgid "Create"
-msgstr ""
-
-#: qxcm/Application.js:84
-msgid "Remove"
-msgstr ""
-
-#: qxcm/Application.js:103
+#: qxcm/Application.js:76
 msgid "Edit Contact"
 msgstr ""
 
-#: qxcm/Application.js:116
+#: qxcm/Application.js:80
 msgid "Create new contact"
 msgstr ""
 
-#: qxcm/Editor.js:10
+#: qxcm/screens/EditorModal.js:48
+msgid "Contact Saved"
+msgstr ""
+
+#: qxcm/screens/EditorModal.js:52
+msgid "Error saving contact"
+msgstr ""
+
+#: qxcm/screens/List.js:16
+msgid "Create"
+msgstr ""
+
+#: qxcm/screens/List.js:18
+msgid "Remove"
+msgstr ""
+
+#: qxcm/screens/List.js:20
+msgid "Refresh"
+msgstr ""
+
+#: qxcm/screens/List.js:24
+msgid "Edit"
+msgstr ""
+
+#: qxcm/screens/List.js:69
+msgid "Are you sure you wish to delete this contact?"
+msgstr ""
+
+#: qxcm/screens/editor/Editor.js:10
 msgid "Save"
 msgstr ""
 
-#: qxcm/Editor.js:11
+#: qxcm/screens/editor/Editor.js:11
 msgid "Cancel"
 msgstr ""
 
-#: qxcm/Editor.js:16
+#: qxcm/screens/editor/Editor.js:16
 msgid "First Name"
 msgstr ""
 
-#: qxcm/Editor.js:17
+#: qxcm/screens/editor/Editor.js:17
 msgid "Last Name"
 msgstr ""
 
-#: qxcm/Editor.js:18
+#: qxcm/screens/editor/Editor.js:18
 msgid "Email"
 msgstr ""
 
-#: qxcm/Editor.js:19
+#: qxcm/screens/editor/Editor.js:19
 msgid "Mobile"
 msgstr ""
 
-#: qxcm/Editor.js:20
+#: qxcm/screens/editor/Editor.js:20
 msgid "Home"
 msgstr ""
 
-#: qxcm/Editor.js:21
+#: qxcm/screens/editor/Editor.js:21
 msgid "Street"
 msgstr ""
 
-#: qxcm/Editor.js:22
+#: qxcm/screens/editor/Editor.js:22
 msgid "City"
 msgstr ""
 
-#: qxcm/Editor.js:23
+#: qxcm/screens/editor/Editor.js:23
 msgid "State"
 msgstr ""
 
-#: qxcm/Editor.js:24
+#: qxcm/screens/editor/Editor.js:24
 msgid "Zip Code"
+msgstr ""
+
+#: qxcm/screens/list/ListController.js:43
+msgid "Successfully removed"
+msgstr ""
+
+#: qxcm/screens/list/ListController.js:48
+msgid "Error while removing contact"
+msgstr ""
+
+#: qxcm/screens/list/ListController.js:57
+msgid "There was an error while loading the list"
 msgstr ""
