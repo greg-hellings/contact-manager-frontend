@@ -10,13 +10,10 @@
 
 /*
  * TODO:
- * - Confirmation message on delete
  * - Confirmation message after successful network event
- * - Masking UI while doing transport
  * - Mobile UI
  * - Factor out backend communications into helper classes for later use
  * - Proper scrolling after delete when at bottom of list
- * - Refresh button
  */
 
 /**
@@ -105,7 +102,6 @@ qx.Class.define("qxcm.Application",
       });
       this.store.bind('model', this.list, 'model');
       this.store.addListener('changeModel', this.__unblock, this);
-
     }
 
     ,__refresh : function() {
@@ -127,6 +123,7 @@ qx.Class.define("qxcm.Application",
     },
 
     save : function(modal) {
+        this.listBlocker.block();
         this.store.save(this.list.getSelection());
         this.modal.close();
     },
@@ -145,11 +142,13 @@ qx.Class.define("qxcm.Application",
     },
 
     __remove : function() {
-        dialog.Dialog.confirm(this.tr('Confirm'), this.tr('Are you sure you wish to delete this contact?'), function() {
-            console.log(arguments);
-            /*this.list.getSelection().forEach(function(selected) {
-                this.store.remove(selected);
-            }, this);*/
+        dialog.Dialog.confirm(this.tr('Are you sure you wish to delete this contact?'), function(confirmed) {
+            if (confirmed) {
+                this.list.getSelection().forEach(function(selected) {
+                    this.store.remove(selected);
+                }, this);
+                this.list.refresh();
+            }
         }, this);
     },
 
