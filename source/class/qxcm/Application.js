@@ -67,70 +67,17 @@ qx.Class.define("qxcm.Application",
 
       doc.add(list, {left : 100, top: 50});
 
-
-
-      // Loading mask
-      /*this.listBlocker = new qx.ui.core.Blocker(this.list);
-      this.listBlocker.setOpacity(.25);
-      this.listBlocker.setColor('black');
-      this.listBlocker.block();
-
-      // Data handling
-      this.store = new qxcm.Store(null, this.list);
-      this.store.bind('model', this.list, 'model');
- 
       // Behavior
-      this.list.addListener('dblclick', this.__onSelectionClick, this);
-      this.create.addListener('execute', this.__create, this);
-      this.remove.addListener('execute', this.__remove, this);
-      this.store.addListener('listfail', this.__listFail, this);
-      this.store.addListener('changeModel', this.__unblock, this);
-     */
+//      this.list.addListener('dblclick', this.__onSelectionClick, this);
+      list.addListener('create', this.__create, this);
     }
 
-    ,__onListChange : function() {
-        this.list.refresh();
-    }
-
-    ,__refresh : function() {
-        this.listBlocker.block();
-        this.store.restResource.list();
-    }
-
-    ,__unblock : function() {
-        this.listBlocker.unblock();
-    }
-
-    ,__onSelectionClick : function() {
-        var form   = new qxcm.Editor(),
-            formController = new qx.data.controller.Form(this.list.getSelection().getItem(0), form);
-
-        this.modal = new qxcm.EditorWindow(this.tr('Edit Contact'), form);
-
-        form.addListener('save',   this.save,       this);
-    },
-
-    save : function(modal) {
-        this.listBlocker.block();
-        this.store.save(this.list.getSelection());
-        this.modal.close();
+    ,__onSelectionClick : function(event) {
+        var modal  = new qxcm.screens.EditorModal(this.tr('Edit Contact'), event.getData());
     },
 
     __create : function() {
-        var form = new qxcm.Editor(),
-            formController = new qx.data.controller.Form(null, form),
-            modal = new qxcm.EditorWindow(this.tr('Create new contact'), form);
-
-        formController.createModel();
-        form.addListener('save', function() {
-            var contact = formController.getModel();
-            this.store.add(contact);
-            modal.close();
-        }, this);
-    },
-
-    __listFail : function() {
-        dialog.Dialog.alert(this.tr('There was an error fetching results from the server.'));
+        var modal = new qxcm.screens.EditorModal(this.tr('Create new contact'));
     }
   }
 });

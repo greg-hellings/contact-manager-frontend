@@ -1,16 +1,57 @@
 qx.Class.define('qxcm.screens.EditorModal', {
-    extend : qx.ui.window.Window,
+    extend : qx.ui.window.Window
 
-    construct : function(title, form) {
+    ,include : [
+        qx.locale.MTranslation
+    ]
+
+    ,construct : function(title, model) {
+        var form;
         this.base(arguments, title);
 
         this.setLayout(new qx.ui.layout.HBox());
         this.setWidth(400);
-        this.add(new qx.ui.form.renderer.Single(form));
         this.setAllowClose(true);
         this.setModal(true);
+
+        form = new qxcm.screens.editor.Editor();
+        this.__formController = new qx.data.controller.Form(model || null, form);
+        if (!model) {
+            this.__formController.createModel();
+        }
+        this.add(new qx.ui.form.renderer.Single(form));
+
+        form.addListener('cancel', this.close,  this);
+        form.addListener('save',   this.__save, this);
+
         this.open();
 
-        form.addListener('cancel', this.close, this);
+        this.__blocker = new qx.ui.core.Blocker(this);
+        this.__blocker.setOpacity(0.25);
+        this.__blocker.setColor('black');
+    }
+
+    ,members : {
+        __save : function() {
+            var contact = this.__formController.getModel(),
+                store   = qxcm.data.ContactsStore.getInstance();
+            this.__blocker.block();
+            store.save(contact);
+            store.addListener('createSuccess', this.__saveComplete, this);
+            store.addListener('createError',   this.__saveComplete, this);
+            store.addListener('updateSuccess', this.__saveComplete, this);
+            store.addListener('updateError',   this.__saveComplete, this);
+        }
+
+        ,__saveComplete : function(success) {
+            if (success) {
+                dialog.Dialog.alert(this.tr('Contact Saved'));
+                this.close();
+                qxcm.data.ContactsStore.getInstance().refresh();
+            } else {
+                dialog.Dialog.alert(this.tr('Error saving contact'));
+                this.__blocker.unblock();
+            }
+        }
     }
 });

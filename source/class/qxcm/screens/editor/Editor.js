@@ -1,11 +1,11 @@
 qx.Class.define('qxcm.screens.editor.Editor', {
-    extend    : qx.ui.form.Form,
+    extend    : qx.ui.form.Form
 
-    include   : [
+    ,include   : [
         qx.locale.MTranslation
-    ],
+    ]
 
-    construct : function(model) {
+    ,construct : function(model) {
         var firstName = new qx.ui.form.TextField(),
             save      = new qx.ui.form.Button(this.tr('Save')),
             cancel    = new qx.ui.form.Button(this.tr('Cancel'));
@@ -28,9 +28,14 @@ qx.Class.define('qxcm.screens.editor.Editor', {
 
         cancel.addListener('click', this.cancel, this);
         save.addListener  ('click', this.save,   this);
-    },
+    }
 
-    members : {
+    ,events : {
+        'cancel' : 'qx.event.type.Event'
+        ,'save'  : 'qx.event.type.Event'
+    }
+
+    ,members : {
         cancel : function() {
             this.fireEvent('cancel');
         },

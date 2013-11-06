@@ -1,5 +1,6 @@
 qx.Class.define('qxcm.data.ContactsStore', {
     extend : qx.data.store.Rest
+    ,type  : 'singleton'
 
     ,construct : function() {
         var single = '/contacts/{_id}',
@@ -27,10 +28,14 @@ qx.Class.define('qxcm.data.ContactsStore', {
             };
         this.restResource = new qx.io.rest.Resource(description);
 
-        this.restResource.addListener('listSuccess', this.__listListener, this);
-        this.restResource.addListener('listError',   this.__listListener, this);
-        this.restResource.addListener('removeSuccess', this.__removeListener, this);
-        this.restResource.addListener('removeError',   this.__removeListener, this);
+        this.restResource.addListener('listSuccess', this.__listener, this);
+        this.restResource.addListener('listError',   this.__listener, this);
+        this.restResource.addListener('removeSuccess', this.__listener, this);
+        this.restResource.addListener('removeError',   this.__listener, this);
+        this.restResource.addListener('updateSuccess', this.__listener, this);
+        this.restResource.addListener('updateError',   this.__listener, this);
+        this.restResource.addListener('createSuccess', this.__listener, this);
+        this.restResource.addListener('createError',   this.__listener, this);
 
         this.restResource.list();
 
@@ -42,6 +47,10 @@ qx.Class.define('qxcm.data.ContactsStore', {
         ,'listSuccess'  : 'qx.event.type.Event'
         ,'removeError'  : 'qx.event.type.Event'
         ,'removeSuccess': 'qx.event.type.Event'
+        ,'updateError'  : 'qx.event.type.Event'
+        ,'updateSuccess': 'qx.event.type.Event'
+        ,'createError'  : 'qx.event.type.Event'
+        ,'createSuccess': 'qx.event.type.Event'
     }
 
     ,members : {
@@ -51,6 +60,15 @@ qx.Class.define('qxcm.data.ContactsStore', {
         
         ,remove : function(data) {
             this.__call('remove', data);
+        }
+
+        ,save : function(model) {
+            var isCreate = this.getModel().indexOf(model) < 0;
+            if (isCreate) {
+                this.__call('create', model);
+            } else {
+                this.__call('update', model);
+            }
         }
 
         ,__call : function(method, data) {
@@ -98,21 +116,12 @@ qx.Class.define('qxcm.data.ContactsStore', {
             [];
         }
 
-        ,__listListener : function(event) {
+        ,__listener : function(event) {
             var result = event.getData();
             if (!result || result.success == false) {
-                this.fireEvent('listError');
+                this.fireEvent(event.getAction() + 'Error');
             } else {
-                this.fireEvent('listSuccess');
-            }
-        }
-
-        ,__removeListener : function(event) {
-            var result = event.getData();
-            if (!result || result.success == false) {
-                this.fireEvent('removeError');
-            } else {
-                this.fireEvent('removeSuccess');
+                this.fireEvent(event.getAction() + 'Success');
             }
         }
     }

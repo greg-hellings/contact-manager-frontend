@@ -8,11 +8,9 @@ qx.Class.define('qxcm.screens.list.ListController', {
     ,construct : function(list) {
         this.base(arguments, null, list);
 
-        //this.list = list;
         this.setLabelOptions({converter : this.converter});
-        this.__store = new qxcm.data.ContactsStore();
+        this.__store = qxcm.data.ContactsStore.getInstance();
         this.__store.bind('model', this, 'model');
-        //this.bind('model', list, 'model');
 
         this.__store.addListener('removeSuccess', this.__removeSuccess, this);
         this.__store.addListener('removeError', this.__removeError, this);

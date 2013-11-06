@@ -34,7 +34,14 @@ qx.Class.define('qxcm.screens.List', {
         // Listeners
         refresh.addListener('execute', this.__refreshList, this);
         remove .addListener('execute', this.__removeItem,  this);
+        create .addListener('execute', this.__create,      this);
+        list   .addListener('execute', this.__edit,        this);
         this.__listController.addListener('listloaded', this.unblock, this);
+    }
+
+    ,events : {
+        'create' : 'qx.event.type.Event'
+        ,'edit'  : 'qx.event.type.Data'
     }
 
     ,members : {
@@ -56,6 +63,14 @@ qx.Class.define('qxcm.screens.List', {
                     this.__listController.removeSelection();
                 }
             }, this);
+        }
+
+        ,__create : function() {
+            this.fireEvent('create');
+        }
+
+        ,__edit : function() {
+            this.fireDataEvent('edit', this.__listController.getSelection().getItem(0));
         }
     }
 });
