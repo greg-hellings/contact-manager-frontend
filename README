@@ -1,0 +1,7 @@
+This is a demo contact list front-end written with the Qooxdoo JavaScript widget library.
+
+To deploy you will need first to get http://github.com/azizpunjani/contact-manager-express-backend up and running on your machine with NodeJS. Additionally you will need to install Qooxdoo (this applicaiton was developed against version 3.0.1). After you have the backend up and running, you will need to change into the public/app folder and clone this repository into that. You can then run the command ./generate.py within this folder.
+
+Access will be under the directory /app/source/. If, instead, you execute './generate.py build' then you will be able to access the built version of the application at /app/build/.
+
+Alternatively you could build in any other directory on your system and transfer the build results into the public/ directory of your contact-manager-express-backend setup.
