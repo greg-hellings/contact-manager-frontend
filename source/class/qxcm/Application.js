@@ -61,47 +61,35 @@ qx.Class.define("qxcm.Application",
       -------------------------------------------------------------------------
       */
 
-      // Create the UI
-      this.store = new qxcm.Store();
-      this.list = new qx.ui.list.List();
-      this.list.setWidth(270);
-      this.list.setHeight(200);
-      this.create = new qx.ui.form.Button(this.tr('Create'));
-      this.create.setWidth(75);
-      this.remove = new qx.ui.form.Button(this.tr('Remove'));
-      this.remove.setWidth(75);
-      this.refresh= new qx.ui.form.Button(this.tr('Refresh'));
-      this.refresh.setWidth(75);
-
       // Insert the UI
-      var doc = this.getRoot();
-      doc.add(this.list, {left: 100, top: 50});
-      doc.add(this.create, {left: 100, top: 255});
-      doc.add(this.remove, {left: 180, top: 255});
-      doc.add(this.refresh, {left: 260, top: 255});
+      var doc  = this.getRoot(),
+          list = new qxcm.screens.List();
+
+      doc.add(list, {left : 100, top: 50});
+
+
 
       // Loading mask
-      this.listBlocker = new qx.ui.core.Blocker(this.list);
+      /*this.listBlocker = new qx.ui.core.Blocker(this.list);
       this.listBlocker.setOpacity(.25);
       this.listBlocker.setColor('black');
       this.listBlocker.block();
 
+      // Data handling
+      this.store = new qxcm.Store(null, this.list);
+      this.store.bind('model', this.list, 'model');
+ 
       // Behavior
       this.list.addListener('dblclick', this.__onSelectionClick, this);
       this.create.addListener('execute', this.__create, this);
       this.remove.addListener('execute', this.__remove, this);
       this.store.addListener('listfail', this.__listFail, this);
-      this.refresh.addListener('execute', this.__refresh, this);
-
-      // Data handling
-      this.list.setLabelOptions({
-        converter : function(value, model) {
-            var name = value.get('name');
-            return name.get('last') + ', ' + name.get('first');
-        }            
-      });
-      this.store.bind('model', this.list, 'model');
       this.store.addListener('changeModel', this.__unblock, this);
+     */
+    }
+
+    ,__onListChange : function() {
+        this.list.refresh();
     }
 
     ,__refresh : function() {
@@ -138,17 +126,6 @@ qx.Class.define("qxcm.Application",
             var contact = formController.getModel();
             this.store.add(contact);
             modal.close();
-        }, this);
-    },
-
-    __remove : function() {
-        dialog.Dialog.confirm(this.tr('Are you sure you wish to delete this contact?'), function(confirmed) {
-            if (confirmed) {
-                this.list.getSelection().forEach(function(selected) {
-                    this.store.remove(selected);
-                }, this);
-                this.list.refresh();
-            }
         }, this);
     },
 
