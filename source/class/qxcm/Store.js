@@ -28,6 +28,9 @@ qx.Class.define('qxcm.Store', {
         this.restResource = new qx.io.rest.Resource(description),
         this.restStore    = new qx.data.store.Rest(this.restResource, 'list', {manipulateData : this.__convertToStrings});
 
+        this.restResource.addListener('listSuccess', this.__listListener, this);
+        this.restResource.addListener('listError',   this.__listListener, this);
+
         this.restResource.list();
 
         this.restStore.bind('model', this, 'model');          // When data comes in, it will be populated here
@@ -35,11 +38,15 @@ qx.Class.define('qxcm.Store', {
         this.base(arguments);
     },
 
+    events : {
+        'listfail' : 'qx.event.type.Event'
+    },
+
     members : {
         // Converts all-number fields to strings for safe handling
         // Normalizes the entries which have string-only names
         __convertToStrings : function(data) {
-            return data.map(function(value, index, array) {
+            return 'map' in data ? data.map(function(value, index, array) {
                 var output = value;
 
                 if (qx.lang.Type.isString(value.name)) {
@@ -54,7 +61,8 @@ qx.Class.define('qxcm.Store', {
                 output.address.zip  = output.address ? qx.data.Conversion.toString( value.address.zip ) : '';
 
                 return output;
-            });
+            }) : 
+            [];
         },
 
         save : function(selection) {
@@ -93,7 +101,13 @@ qx.Class.define('qxcm.Store', {
             } else {
                 this.restResource[method](null, qx.util.Serializer.toNativeObject(data));
             }
-        }
+        },
 
+        __listListener : function(event) {
+            var result = event.getData();
+            if (result && result.success == false) {
+                this.fireEvent('listfail');
+            }
+        }
     }
 });

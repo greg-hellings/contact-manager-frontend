@@ -9,7 +9,7 @@ var envinfo = {"qx.application":"qxcm.Application","qx.revision":"","qx.theme":"
 for (var k in envinfo) qx.$$environment[k] = envinfo[k];
 
 if (!qx.$$libraries) qx.$$libraries = {};
-var libinfo = {"__out__":{"sourceUri":"script"},"qx":{"resourceUri":"../../../../../../../usr/share/qooxdoo-3.0/framework/source/resource","sourceUri":"../../../../../../../usr/share/qooxdoo-3.0/framework/source/class","sourceViewUri":"https://github.com/qooxdoo/qooxdoo/blob/%{qxGitBranch}/framework/source/class/%{classFilePath}#L%{lineNumber}"},"qxcm":{"resourceUri":"../source/resource","sourceUri":"../source/class"}};
+var libinfo = {"__out__":{"sourceUri":"script"},"dialog":{"resourceUri":"../../../../../../../tmp/qx3.0/cache/downloads/Dialog/master/source/resource","sourceUri":"../../../../../../../tmp/qx3.0/cache/downloads/Dialog/master/source/class"},"qx":{"resourceUri":"../../../../../../../usr/share/qooxdoo-3.0/framework/source/resource","sourceUri":"../../../../../../../usr/share/qooxdoo-3.0/framework/source/class","sourceViewUri":"https://github.com/qooxdoo/qooxdoo/blob/%{qxGitBranch}/framework/source/class/%{classFilePath}#L%{lineNumber}"},"qxcm":{"resourceUri":"../source/resource","sourceUri":"../source/class"}};
 for (var k in libinfo) qx.$$libraries[k] = libinfo[k];
 
 qx.$$resources = {};
@@ -20,7 +20,7 @@ qx.$$g = {}
 
 qx.$$loader = {
   parts : {"boot":[0]},
-  packages : {"0":{"uris":["__out__:qxcm.a86538e640ce.js","qxcm:qxcm/Application.js","__out__:qxcm.ff084453340d.js","qxcm:qxcm/Store.js","__out__:qxcm.ed80f2688b0c.js","qxcm:qxcm/Editor.js","__out__:qxcm.ce8b235659ce.js","qxcm:qxcm/EditorWindow.js","__out__:qxcm.cbf4dccb6090.js","qxcm:qxcm/theme/Appearance.js","__out__:qxcm.f56a0c2ca51a.js","qxcm:qxcm/theme/Font.js","__out__:qxcm.29419cebdc36.js","qxcm:qxcm/theme/Color.js","__out__:qxcm.870138203df5.js","qxcm:qxcm/theme/Decoration.js","qxcm:qxcm/theme/Theme.js"]}},
+  packages : {"0":{"uris":["__out__:qxcm.c35b9466fcc3.js","qxcm:qxcm/Application.js","__out__:qxcm.ff084453340d.js","qxcm:qxcm/Store.js","__out__:qxcm.ed80f2688b0c.js","qxcm:qxcm/Editor.js","__out__:qxcm.ce8b235659ce.js","qxcm:qxcm/EditorWindow.js","__out__:qxcm.f706dd6061a7.js","qxcm:qxcm/theme/Appearance.js","__out__:qxcm.f56a0c2ca51a.js","qxcm:qxcm/theme/Font.js","__out__:qxcm.29419cebdc36.js","qxcm:qxcm/theme/Color.js","__out__:qxcm.870138203df5.js","qxcm:qxcm/theme/Decoration.js","qxcm:qxcm/theme/Theme.js"]}},
   urisBefore : [],
   cssBefore : [],
   boot : "boot",

@@ -64,11 +64,39 @@ qx.Class.define("qxcm.Application",
       -------------------------------------------------------------------------
       */
 
-      // Create the list
+      // Create the UI
       this.store = new qxcm.Store();
       this.list = new qx.ui.list.List();
       this.list.setWidth(270);
       this.list.setHeight(200);
+      this.create = new qx.ui.form.Button(this.tr('Create'));
+      this.create.setWidth(75);
+      this.remove = new qx.ui.form.Button(this.tr('Remove'));
+      this.remove.setWidth(75);
+      this.refresh= new qx.ui.form.Button(this.tr('Refresh'));
+      this.refresh.setWidth(75);
+
+      // Insert the UI
+      var doc = this.getRoot();
+      doc.add(this.list, {left: 100, top: 50});
+      doc.add(this.create, {left: 100, top: 255});
+      doc.add(this.remove, {left: 180, top: 255});
+      doc.add(this.refresh, {left: 260, top: 255});
+
+      // Loading mask
+      this.listBlocker = new qx.ui.core.Blocker(this.list);
+      this.listBlocker.setOpacity(.25);
+      this.listBlocker.setColor('black');
+      this.listBlocker.block();
+
+      // Behavior
+      this.list.addListener('dblclick', this.__onSelectionClick, this);
+      this.create.addListener('execute', this.__create, this);
+      this.remove.addListener('execute', this.__remove, this);
+      this.store.addListener('listfail', this.__listFail, this);
+      this.refresh.addListener('execute', this.__refresh, this);
+
+      // Data handling
       this.list.setLabelOptions({
         converter : function(value, model) {
             var name = value.get('name');
@@ -76,23 +104,17 @@ qx.Class.define("qxcm.Application",
         }            
       });
       this.store.bind('model', this.list, 'model');
+      this.store.addListener('changeModel', this.__unblock, this);
 
-      this.create = new qx.ui.form.Button(this.tr('Create'));
-      this.create.setWidth(75);
+    }
 
-      this.remove = new qx.ui.form.Button(this.tr('Remove'));
-      this.remove.setWidth(75);
-      // Document is the application root
-      var doc = this.getRoot();
+    ,__refresh : function() {
+        this.listBlocker.block();
+        this.store.restResource.list();
+    }
 
-      // Add button to document at fixed coordinates
-      doc.add(this.list, {left: 100, top: 50});
-      doc.add(this.create, {left: 100, top: 255});
-      doc.add(this.remove, {left: 180, top: 255});
-
-      this.list.addListener('dblclick', this.__onSelectionClick, this);
-      this.create.addListener('execute', this.__create, this);
-      this.remove.addListener('execute', this.__remove, this);
+    ,__unblock : function() {
+        this.listBlocker.unblock();
     }
 
     ,__onSelectionClick : function() {
@@ -123,9 +145,16 @@ qx.Class.define("qxcm.Application",
     },
 
     __remove : function() {
-        this.list.getSelection().forEach(function(selected) {
-            this.store.remove(selected);
+        dialog.Dialog.confirm(this.tr('Confirm'), this.tr('Are you sure you wish to delete this contact?'), function() {
+            console.log(arguments);
+            /*this.list.getSelection().forEach(function(selected) {
+                this.store.remove(selected);
+            }, this);*/
         }, this);
+    },
+
+    __listFail : function() {
+        dialog.Dialog.alert(this.tr('There was an error fetching results from the server.'));
     }
   }
 });
