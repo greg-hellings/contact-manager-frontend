@@ -1,4 +1,4 @@
-qx.Class.define('qxcm.EditorWindow', {
+qx.Class.define('qxcm.screens.EditorModal', {
     extend : qx.ui.window.Window,
 
     construct : function(title, form) {

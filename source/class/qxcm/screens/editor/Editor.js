@@ -1,4 +1,4 @@
-qx.Class.define('qxcm.Editor', {
+qx.Class.define('qxcm.screens.editor.Editor', {
     extend    : qx.ui.form.Form,
 
     include   : [
