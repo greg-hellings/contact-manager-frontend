@@ -19,11 +19,11 @@ msgstr "Modificar Contacto"
 msgid "Create new contact"
 msgstr "Crear contacto nuevo"
 
-#: qxcm/screens/EditorModal.js:48
+#: qxcm/screens/EditorModal.js:51
 msgid "Contact Saved"
 msgstr ""
 
-#: qxcm/screens/EditorModal.js:52
+#: qxcm/screens/EditorModal.js:55
 msgid "Error saving contact"
 msgstr ""
 
