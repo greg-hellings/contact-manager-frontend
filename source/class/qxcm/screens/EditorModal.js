@@ -32,18 +32,21 @@ qx.Class.define('qxcm.screens.EditorModal', {
     }
 
     ,members : {
-        __save : function() {
+        __listeners : []
+
+        ,__save : function() {
             var contact = this.__formController.getModel(),
                 store   = qxcm.data.ContactsStore.getInstance();
             this.__blocker.block();
             store.save(contact);
-            store.addListener('createSuccess', this.__saveComplete, this);
-            store.addListener('createError',   this.__saveComplete, this);
-            store.addListener('updateSuccess', this.__saveComplete, this);
-            store.addListener('updateError',   this.__saveComplete, this);
+            this.__listeners.push(store.addListener('createSuccess', this.__saveComplete, this));
+            this.__listeners.push(store.addListener('createError',   this.__saveComplete, this));
+            this.__listeners.push(store.addListener('updateSuccess', this.__saveComplete, this));
+            this.__listeners.push(store.addListener('updateError',   this.__saveComplete, this));
         }
 
         ,__saveComplete : function(success) {
+            var store = qxcm.data.ContactsStore.getInstance();
             if (success) {
                 dialog.Dialog.alert(this.tr('Contact Saved'));
                 this.close();
@@ -52,6 +55,9 @@ qx.Class.define('qxcm.screens.EditorModal', {
                 dialog.Dialog.alert(this.tr('Error saving contact'));
                 this.__blocker.unblock();
             }
+            this.__listeners.forEach(function(listener) {
+                store.removeListenerById(listener);
+            });
         }
     }
 });
