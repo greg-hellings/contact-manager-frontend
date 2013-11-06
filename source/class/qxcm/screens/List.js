@@ -6,7 +6,9 @@ qx.Class.define('qxcm.screens.List', {
             create,
             remove,
             refresh,
-            listController;
+            listController,
+            menu,
+            menuItemEdit;
         // Create the UI
         list = new qx.ui.form.List();
         list.setWidth(270);
@@ -17,6 +19,11 @@ qx.Class.define('qxcm.screens.List', {
         remove.setWidth(75);
         refresh= new qx.ui.form.Button(this.tr('Refresh'));
         refresh.setWidth(75);
+
+        menu = new qx.ui.menu.Menu();
+        menuItemEdit = new qx.ui.menu.Button(this.tr('Edit'));
+        menu.add(menuItemEdit);
+        list.setContextMenu(menu);
 
         this.base(arguments, new qx.ui.layout.Canvas());
 
@@ -32,10 +39,11 @@ qx.Class.define('qxcm.screens.List', {
         this.__listBlocker.setColor('black');
 
         // Listeners
-        refresh.addListener('execute', this.__refreshList, this);
-        remove .addListener('execute', this.__removeItem,  this);
-        create .addListener('execute', this.__create,      this);
-        list   .addListener('execute', this.__edit,        this);
+        refresh.addListener('execute',  this.__refreshList, this);
+        remove .addListener('execute',  this.__removeItem,  this);
+        create .addListener('execute',  this.__create,      this);
+        list   .addListener('dblclick', this.__edit,        this);
+        menuItemEdit.addListener('execute', this.__edit,    this);
         this.__listController.addListener('listloaded', this.unblock, this);
     }
 

@@ -68,11 +68,11 @@ qx.Class.define("qxcm.Application",
       doc.add(list, {left : 100, top: 50});
 
       // Behavior
-//      this.list.addListener('dblclick', this.__onSelectionClick, this);
+      list.addListener('edit',   this.__edit,   this);
       list.addListener('create', this.__create, this);
     }
 
-    ,__onSelectionClick : function(event) {
+    ,__edit : function(event) {
         var modal  = new qxcm.screens.EditorModal(this.tr('Edit Contact'), event.getData());
     },
 
