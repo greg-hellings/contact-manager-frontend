@@ -72,8 +72,15 @@ qx.Class.define("qxcm.Application",
       // Behavior
       list.addListener('edit',   this.__edit,   this);
       list.addListener('create', this.__create, this);
+
+      this.__router.onGet('/contacts', this.__clearModals, this);
     }
 
+    ,__clearModals : function(event) {
+        qxcm.screens.EditorModal.windows.forEach(function(win) {
+            win.close();
+        });
+    }
 
     ,__edit : function(event) {
         var modal  = new qxcm.screens.EditorModal(this.tr('Edit Contact'), event.getData());

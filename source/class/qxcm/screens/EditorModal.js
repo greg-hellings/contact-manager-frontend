@@ -5,6 +5,10 @@ qx.Class.define('qxcm.screens.EditorModal', {
         qx.locale.MTranslation
     ]
 
+    ,statics : {
+        windows : new qx.type.Array()
+    }
+
     ,construct : function(title, model) {
         var form;
         this.base(arguments, title);
@@ -29,6 +33,12 @@ qx.Class.define('qxcm.screens.EditorModal', {
         this.__blocker = new qx.ui.core.Blocker(this);
         this.__blocker.setOpacity(0.25);
         this.__blocker.setColor('black');
+
+        this.self(arguments).windows.push(this);
+    }
+
+    ,destruct : function() {
+        this.self(arguments).windows.remove(this);
     }
 
     ,members : {
