@@ -65,6 +65,8 @@ qx.Class.define("qxcm.Application",
       var doc  = this.getRoot(),
           list = new qxcm.screens.List();
 
+      this.__router = new qx.application.Routing();
+
       doc.add(list, {left : 100, top: 50});
 
       // Behavior
@@ -72,12 +74,19 @@ qx.Class.define("qxcm.Application",
       list.addListener('create', this.__create, this);
     }
 
+
     ,__edit : function(event) {
         var modal  = new qxcm.screens.EditorModal(this.tr('Edit Contact'), event.getData());
-    },
+        modal.addListener('close', this.__navToContacts, this);
+    }
 
-    __create : function() {
+    ,__create : function() {
         var modal = new qxcm.screens.EditorModal(this.tr('Create new contact'));
+        modal.addListener('close', this.__navToContacts, this);
+    }
+
+    ,__navToContacts : function() {
+        this.__router.execute('/contacts');
     }
   }
 });

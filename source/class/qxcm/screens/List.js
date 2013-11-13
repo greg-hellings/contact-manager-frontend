@@ -9,6 +9,8 @@ qx.Class.define('qxcm.screens.List', {
             listController,
             menu,
             menuItemEdit;
+        this.router = new qx.application.Routing();
+
         // Create the UI
         list = new qx.ui.form.List();
         list.setWidth(270);
@@ -45,6 +47,9 @@ qx.Class.define('qxcm.screens.List', {
         list   .addListener('dblclick', this.__edit,        this);
         menuItemEdit.addListener('execute', this.__edit,    this);
         this.__listController.addListener('listloaded', this.unblock, this);
+
+        this.router.onGet('/contacts/{id}', this.__editFromHash, this);
+        this.router.init();
     }
 
     ,events : {
@@ -78,7 +83,26 @@ qx.Class.define('qxcm.screens.List', {
         }
 
         ,__edit : function() {
-            this.fireDataEvent('edit', this.__listController.getSelection().getItem(0));
+            this.router.execute('/contacts/' + this.__listController.getSelection().getItem(0).get('_id'));
+            //this.fireDataEvent('edit', this.__listController.getSelection().getItem(0));
+        }
+
+        ,__editFromHash : function(data) {
+            var contactList = this.__listController.getModel();
+            if (contactList) {
+                this.__editFromList(data.params.id);
+            } else {
+                this.__listController.addListenerOnce('changeModel', qx.lang.Function.bind(this.__editFromList, this, data.params.id));
+            }
+        }
+
+        ,__editFromList : function(id) {
+            var contactList = this.__listController.getModel().filter(function(contact) {
+                return contact.get('_id') == id;
+            });
+            if (contactList.length) {
+                this.fireDataEvent('edit', contactList.getItem(0));
+            }
         }
     }
 });
